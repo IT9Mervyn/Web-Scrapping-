@@ -1,129 +1,287 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+import calendar
+from calendar import day_name
+import requests
+import csv
+from datetime import date
+from requests.api import head
+import pandas as pd
 
-# C extensions
-*.so
+curr_date = date.today()
+today = date.today().strftime("%Y%m%d")
+print(today)
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+Day = [0,1,2,3,4,5,6,]
+combine_ourdata = []
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=radio1'
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+    url= str1+str2+str3
+    #print(url)
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
 
-# Translations
-*.mo
-*.pot
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'第一台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
 
-# Flask stuff:
-instance/
-.webassets-cache
 
-# Scrapy stuff:
-.scrapy
 
-# Sphinx documentation
-docs/_build/
 
-# PyBuilder
-target/
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
 
-# Jupyter Notebook
-.ipynb_checkpoints
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=radio2'
 
-# IPython
-profile_default/
-ipython_config.py
+    url= str1+str2+str3
+    #print(url)
 
-# pyenv
-.python-version
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'第二台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
 
-# SageMath parsed files
-*.sage.py
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
 
-# Rope project settings
-.ropeproject
 
-# mkdocs documentation
-/site
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=radio3'
 
-# Pyre type checker
-.pyre/
+    url= str1+str2+str3
+    #print(url)
+
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
+
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
+
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'第三台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
+
+
+
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
+
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=radio4'
+
+    url= str1+str2+str3
+    #print(url)
+
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
+
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
+
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'第四台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
+
+
+
+
+
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
+
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=radio5'
+
+    url= str1+str2+str3
+    #print(url)
+
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
+
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
+
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'第五台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
+
+
+
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
+
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=radio6'
+
+    url= str1+str2+str3
+    #print(url)
+
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
+
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
+
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'第六台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
+
+
+
+for y in Day:
+    Date_DL =(int(today)+y)
+    #print(Date_DL)
+
+    str1 = 'https://www.rthk.hk/radio/getTimetable?d='
+    str2 = str(Date_DL)
+    str3 = '&c=pth'
+
+    url= str1+str2+str3
+    #print(url)
+
+    headers = {
+         'Accept':'application/json',
+         'Content-Type':'application/json'
+    }
+
+    response = requests.request("Get", url,headers=headers,data={})
+    myjson = response.json()
+    ourdata = []
+    
+    csvheader = ['Program_channel','Program_url','Date','Program_time', 'ENG_TITLE','CHIN_TITLE']
+
+    for x in myjson['timetable']:
+        listing=[x['programme'],x['name']]
+        program_time = [x['start'],x['end']]
+        combine_time = program_time[0]+'-'+ program_time[1]
+        #print(combine_time)
+        ourdata.append(listing)
+        listing.insert(0,'普通話台')
+        listing.insert(1,url)
+        listing.insert(2,Date_DL) 
+        listing.insert(3,combine_time)
+        
+    combine_ourdata.append(ourdata)
+
+
+file_name = 'RTHK'+ today +'.csv'
+
+with open(file_name,'w',encoding='utf_8_sig', newline='')as f:
+    writer = csv.writer(f)
+    writer.writerow(csvheader)
+    for line in combine_ourdata:
+        writer.writerows(line)
+    
+print('done -.-')
